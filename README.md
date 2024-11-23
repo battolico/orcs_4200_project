@@ -618,11 +618,11 @@ small_transformed_merged_df = (
 
 Now we can formally define the problem with LinUCB:
 
-$$
+```math
 \begin{aligned}
 \text{Arms: } & K           = 40 &\quad \text{The video catagory}\\
 \text{Features: } & x_{t,a} \in \mathbb R^{11} &\quad \text{The user features}\\
 \text{Reward Function: } & Reward_{t,a}  = x^\top_{t, a}\beta_a + \epsilon_{t,a}\\
 \text{Objective: } & \min_{a_t} Regret_t  = \quad \sum_{t=1}^T(Reward_{t, a^*_t} - Reward_{t, a_t})
 \end{aligned}
-$$
+```
