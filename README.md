@@ -1,12 +1,18 @@
 # orcs_4200_project
 Muti-Armed Bandits RecSys (KuaiRec Dataset)
 
+We are going to use multi-armed bandits to create a recommendation system. We are going to simulate whether users will click on a specific video or not, and based on that make future predictions.
+
 ### KuaiRec Dataset
 
-The KuaiRec Dataset contains user interactions on a webpage. 
-For this project, we focus on the videos a user clicks. Our goal is to predict which video a user will click next, given the videos they clicked on in the past.
+The KuaiRec Dataset contains user interactions on a webpage. [source](https://kuairec.com/)
 
-<div>
+Implementation can be found at [bandit_Nov22.ipynb](./bandit_Nov22.ipynb)
+
+For this project, we focus on the videos a user clicks.
+Our goal is to predict which video a user will click next, given the videos they clicked on in the past.
+
+ <div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -230,7 +236,7 @@ For this project, we focus on the videos a user clicks. Our goal is to predict w
   </tbody>
 </table>
 <p>4676570 rows × 15 columns</p>
-</div>
+</div> 
 
 ---
 
@@ -622,7 +628,11 @@ Now we can formally define the problem with LinUCB:
 \begin{aligned}
 \text{Arms: } & K           = 40 &\quad \text{The video catagory}\\
 \text{Features: } & x_{t,a} \in \mathbb R^{11} &\quad \text{The user features}\\
-\text{Reward Function: } & Reward_{t,a}  = x^\top_{t, a}\beta_a + \epsilon_{t,a}\\
+\text{Reward Function: } & {Reward}_{t,a_t}  = x^\top_{t, a}\beta_a + \epsilon_{t,a}\\
 \text{Objective: } & \min_{a_t} Regret_t  = \quad \sum_{t=1}^T(Reward_{t, a^*_t} - Reward_{t, a_t})
 \end{aligned}
 ```
+
+After training, the cumulative regret looks like the following:
+
+![./regret_plot.png](regret_plot.png)
