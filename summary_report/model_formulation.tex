@@ -1,0 +1,43 @@
+\section{Model Formulation and Estimation}
+
+\subsection{Contextual Multi-Armed Bandit Framework}
+
+We frame the recommendation problem as a Contextual Multi-Armed Bandit (CMAB). In this setting:
+
+\begin{itemize}
+    \item \textbf{Context:} At each decision point (i.e., each recommendation opportunity), we observe a feature vector describing the user and current environment. This vector includes user-level features (such as demographics and historical engagement patterns) as well as item-level characteristics (aggregated by category).
+    \item \textbf{Arms:} The set of items (or categories, in our chosen approach) available for recommendation at each time step. Each arm corresponds to a category we can recommend.
+    \item \textbf{Rewards:} After recommending a category, we observe the watch ratio (or a related engagement metric) as the reward. Higher watch ratios indicate better alignment with user preferences.
+\end{itemize}
+
+The goal is to select arms (categories) over a sequence of trials to maximize cumulative rewards while learning from evolving user contexts.
+
+\subsection{LinUCB Algorithm}
+
+To efficiently incorporate contextual information, we employ the LinUCB algorithm. LinUCB assumes that the expected reward of each arm is a linear function of the contextual features:
+
+\[
+r_{a}(x) = \theta_a^\top x + \epsilon,
+\]
+
+where \(r_{a}(x)\) is the reward for arm \(a\) given context \(x\), \(\theta_a\) is a parameter vector associated with arm \(a\), and \(\epsilon\) is noise. The algorithm maintains an estimate of \(\theta_a\) for each arm and uses an upper confidence bound strategy to balance exploration and exploitation.
+
+For each arm \(a\), LinUCB maintains a matrix \(A_a\) and vector \(b_a\):
+
+\[
+A_a = I + \sum_{t: a_t = a} x_t x_t^\top, \quad b_a = \sum_{t: a_t = a} r_{t} x_t,
+\]
+
+where \(x_t\) is the context vector at time \(t\), and \(r_t\) is the observed reward. The estimate of \(\theta_a\) is:
+
+\[
+\hat{\theta}_a = A_a^{-1} b_a.
+\]
+
+When selecting an arm at time \(t\), LinUCB computes an upper confidence bound:
+
+\[
+\text{UCB}_a(x_t) = \hat{\theta}_a^\top x_t + \alpha \sqrt{x_t^\top A_a^{-1} x_t},
+\]
+
+where \(\alpha\) controls the degree of exploration. The algorithm selects the arm with the highest UCB value. Over time, this approach refines its parameter estimates and improves its ability to recommend categories that yield higher rewards.

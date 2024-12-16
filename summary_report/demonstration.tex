@@ -1,0 +1,17 @@
+\section{Demonstration of Improved Decision-Making}
+
+We demonstrate LinUCB's effectiveness by simulating a sequence of recommendations on the prepared KuaiRec dataset.
+
+\subsection{Iterative Training}
+
+We iteratively present users from the training set to the bandit model (Figure \ref{train_plot}). Each user's context and available arms (categories) are fed into LinUCB. The model selects a category to recommend, observes the resulting reward (watch ratio), and updates its parameters accordingly.
+    
+\subsection{Cumulative Regret Analysis}
+
+We measure the cumulative regret of the recommendations, defined as the difference between the reward of the chosen arm and the best possible arm in hindsight. As the model learns, the cumulative regret curve flattens, indicating that LinUCB is converging toward optimal decisions. Reduced regret over time demonstrates improved decision-making and more effective recommendations.
+
+\subsection{Testing and Generalization}
+
+After training, we apply the learned model to the test set without further parameter updates (Figure \ref{test_plot}. By comparing cumulative regret and average rewards between the training and testing phases, we ensure that the model's performance gains are not limited to the training sample. We observe that LinUCB generalizes well, continuing to provide high-quality recommendations and minimal regret on unseen user data.
+
+The result is a recommendation strategy that adaptively learns user preferences and adjusts its recommendations to maximize engagement, all while efficiently exploring new categories that might interest users.

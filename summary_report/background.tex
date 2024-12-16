@@ -1,0 +1,29 @@
+\section{Background}
+
+Recommender systems are an integral part of modern digital platforms, providing personalized suggestions to users across domains such as e-commerce, video streaming, social media, and news platforms. These systems enhance user experience and engagement by predicting preferences and delivering relevant content. A significant challenge in designing such systems is balancing exploration (recommending novel items to discover new user preferences) with exploitation (maximizing user satisfaction based on known preferences). This trade-off is critical in sequential decision-making scenarios where recommendations must be updated dynamically based on user feedback.
+
+\subsection{Multi-Armed Bandits in Recommender Systems}
+Multi-Armed Bandits (MAB) are a well-suited framework for this dynamic decision-making problem. MAB models treat each recommendation opportunity as a "bandit arm" pull, aiming to maximize cumulative rewards (e.g., user engagement) over time while minimizing regret. The LinUCB (Linear Upper Confidence Bound) algorithm, a contextual bandit approach, is particularly effective as it leverages contextual features about users and items to inform decisions. LinUCB uses linear models to estimate the reward of each arm (recommendation) and incorporates uncertainty through an upper confidence bound, enabling efficient exploration and exploitation.
+
+\subsection{The KuaiRec Dataset}
+
+The KuaiRec dataset provides an exceptional foundation for experimenting with MAB-based recommendation systems due to its unique characteristics:
+
+\begin{enumerate}
+    \item High Density: The dataset includes a nearly fully observed user-item interaction matrix with a $99.6\%$ density in its ``small matrix'' subset. This completeness ensures a robust basis for training and evaluating recommendation models without the common challenges of sparse data.
+    \item Rich Features: KuaiRec incorporates diverse user and item metadata, such as video categories, play durations, and user demographics, which are crucial for contextual recommendation models like LinUCB.
+    \item Dynamic Contexts: The inclusion of temporal information and evolving user interactions allows for simulating real-world recommendation scenarios.
+    \item Scalability: The dataset's structure enables efficient preprocessing, transformation, and merging of features, making it suitable for scaling experiments across multiple recommendation strategies.
+\end{enumerate}
+
+\subsection{This Study}
+
+The study focuses on implementing the LinUCB algorithm on the KuaiRec dataset. The workflow involves:
+
+\begin{enumerate}
+    \item Data Preparation: Preprocessing the small matrix to handle missing values, aggregate watch ratios by video category, and merge contextual features.
+    \item Contextual Bandit Model: Training a LinUCB model with user-item contexts to recommend video categories dynamically. The model predicts rewards for each arm (category) and updates parameters iteratively based on observed rewards.
+    \item Evaluation: Simulating recommendations over multiple trials and measuring performance through cumulative regret, highlighting the trade-offs between exploration and exploitation.
+\end{enumerate}
+
+The unique combination of LinUCB's capability and KuaiRec's data richness provides valuable insights into the effectiveness of contextual bandit models for personalized recommendations. 
