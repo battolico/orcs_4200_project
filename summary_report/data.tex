@@ -11,7 +11,7 @@ To prepare the data for our contextual bandit model:
 \begin{enumerate}
     \item \textbf{Data Cleaning and Integration:} We first cleaned the dataset by addressing missing values. NaN values in numerical columns were replaced by median values to preserve as many data points as possible. Non-numeric or malformed entries were either removed or assigned a placeholder value (e.g., \(-124\) for unknown categories).
 
-    \item \textbf{Feature Engineering:} Contextual information was leveraged to form user and item feature vectors. User features (such as demographic and behavioral traits) were merged with aggregated item-level categories. We pivoted the data to produce a user-by-category matrix that represents how each user engaged with each first-level video category, summing watch ratios across relevant videos. These transformations allowed us to directly incorporate contextual vectors into the LinUCB framework.
+    \item \textbf{Feature Engineering:} Contextual information was leveraged to form user and item feature vectors. User features (such as demographic and behavioral traits) were merged with aggregated item-level categories. We pivoted the data to produce a user-by-category matrix that represents how each user engaged with each first-level video category, \textbf{sum of liked videos} across relevant videos. These transformations allowed us to directly incorporate contextual vectors into the LinUCB framework.
 
     \item \textbf{Normalization and Encoding:} Where appropriate, categorical features were encoded, and time-based features were converted to numeric values representing time since the earliest observation. This step ensured that temporal sequences could be easily interpreted by the bandit model.
 
