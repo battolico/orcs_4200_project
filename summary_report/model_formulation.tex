@@ -2,15 +2,7 @@
 
 \subsection{Contextual Multi-Armed Bandit Framework}
 
-We frame the recommendation problem as a Contextual Multi-Armed Bandit (CMAB). In this setting:
-
-\begin{itemize}
-    \item \textbf{Context:} At each decision point (i.e., each recommendation opportunity), we observe a feature vector describing the user and current environment. This vector includes user-level features (such as demographics and historical engagement patterns) as well as item-level characteristics (aggregated by category).
-    \item \textbf{Arms:} The set of items (or categories, in our chosen approach) available for recommendation at each time step. Each arm corresponds to a category we can recommend.
-    \item \textbf{Rewards:} After recommending a category, we observe the watch ratio (or a related engagement metric) as the reward. Higher watch ratios indicate better alignment with user preferences.
-\end{itemize}
-
-The goal is to select arms (categories) over a sequence of trials to maximize cumulative rewards while learning from evolving user contexts.
+The contextual MAB setting aims to dynamically make recommendation to users with the objective of maximizing engagement. In our implementation, the context are features for each users that capture information ranging from the categories of the video they watched, the time for how long the video was watched, to the date of when it was watched and the video duration. The objective of the model is to predict the first-level category that a user is most likely to engage with. Based on that recommendation, we are then able to calculate the reward. The goal is to select arms (categories) over a sequence of trials to maximize cumulative rewards while learning from evolving user contexts.
 
 \subsection{LinUCB Algorithm}
 

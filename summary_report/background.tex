@@ -5,25 +5,21 @@ Recommender systems are an integral part of modern digital platforms, that provi
 \subsection{Multi-Armed Bandits in Recommender Systems}
 Multi-Armed Bandits (MAB) are a well-suited framework to tackle this dynamic decision-making problem. MAB models treat each recommendation opportunity as a "bandit arm" pull, with the objective of maximize cumulative rewards (ex. user engagement) over time while minimizing the regret (ex. suboptimal recommendations). The LinUCB (Linear Upper Confidence Bound) algorithm, a contextual bandit approach, is particularly effective as it enables us to leverage features about users (covariates) and items to inform decisions. LinUCB uses linear models to estimate the reward of each arm (recommendation) and incorporates uncertainty through an upper confidence bound, enabling efficient exploration and exploitation.
 
-\subsection{The KuaiRec Dataset}
+% \subsection{The KuaiRec Dataset}
 
-The KuaiRec dataset provides an exceptional foundation for experimenting with MAB-based recommendation systems due to its unique characteristics:
+% For the project we decided to use the KuaiRec dataset \cite{gao2022kuairec}, and specifically we are going to use the small\_matrix.csv data set. Specfically, the KuaiRec data set is a " real-world dataset collected from the recommendation logs of the video-sharing mobile app Kuaishou" \cite{gao2022kuairec}. What is different about this project, which is using MABs to model a recommendation system, is that the matrix data that we are going to use contains a fully observed user-item interaction matrix. In most recommendation systems the data that is used to train the system is very sparse, meaning that a user has not interacted with all the possible options which prevents us from making accurate predictions about other types of categories that the user might like. If we are building a music recommendation system, it might not be able to tell whether a user likes classical music if they only interacted with rock music until now. This is especially an issue when we are dealing with the cold start problem - when a new user enters the system and we have no historic data on their preferences \cite{nath2023_medium}. Being able to pursue research with a complete user-item interaction enables us to create a strong recommendation system.
 
-\begin{enumerate}
-    \item High Density: The dataset includes a nearly fully observed user-item interaction matrix with a $99.6\%$ density in its ``small matrix'' subset. This completeness ensures a robust basis for training and evaluating recommendation models without the common challenges of sparse data.
-    \item Rich Features: KuaiRec incorporates diverse user and item metadata, such as video categories, play durations, and user demographics, which are crucial for contextual recommendation models like LinUCB.
-    \item Dynamic Contexts: The inclusion of temporal information and evolving user interactions allows for simulating real-world recommendation scenarios.
-    \item Scalability: The dataset's structure enables efficient preprocessing, transformation, and merging of features, making it suitable for scaling experiments across multiple recommendation strategies.
-\end{enumerate}
+
+% The dataset includes a practically fully observed - $99.6\%$ density - user-item interaction matrix. In most recommendation systems the data that is used to train the system is very sparse, meaning that a user has not interacted with all the possible options which prevents us from making accurate predictions about other types of categories that the user might like. The fact that we have a dense matrix, creates a very robust basis for training a MAB recommender system. 
+
+
 
 \subsection{This Study}
 
 The study focuses on implementing the LinUCB algorithm on the KuaiRec dataset. The workflow involves:
 
 \begin{enumerate}
-    \item Data Preparation: Preprocessing the small matrix to handle missing values, aggregate watch ratios by video category, and merge contextual features.
-    \item Contextual Bandit Model: Training a LinUCB model with user-item contexts to recommend video categories dynamically. The model predicts rewards for each arm (category) and updates parameters iteratively based on observed rewards.
-    \item Evaluation: Simulating recommendations over multiple trials and measuring performance through cumulative regret, highlighting the trade-offs between exploration and exploitation.
+    \item Data Preparation: Preprocessing the small matrix to handle missing values, aggregate watch ratios by video category, and merge contextual features together.
+    \item Contextual MAB Model: Training a LinUCB model with user-item contexts to recommend video categories. The model predicts rewards for each arm (category) and updates parameters iteratively based on observed rewards.
+    \item Evaluation: Simulating recommendations over multiple trials and measuring performance through cumulative regret, and cumulative reward. This will highlight the trade-offs between exploration and exploitation.
 \end{enumerate}
-
-The unique combination of LinUCB's capability and KuaiRec's data richness provides valuable insights into the effectiveness of contextual bandit models for personalized recommendations. 
