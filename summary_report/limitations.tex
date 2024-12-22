@@ -1,22 +1,23 @@
 \section{Contributions and Limitations}
 
-This study contributes to the literature on sequential recommendation strategies by demonstrating how a contextual bandit model, specifically LinUCB, can be applied to a dense real-world dataset like KuaiRec. By leveraging rich contextual data, the LinUCB approach:
+This study contributes to the literature on sequential recommendation strategies by demonstrating how a contextual bandit model, specifically LinUCB, can be applied to a dense real-world dataset like KuaiRec. 
 
-\begin{itemize}
-    \item \textbf{Enhances Adaptability:} The model dynamically updates its estimates of user preferences, continually improving the relevance of its recommendations.
-    \item \textbf{Balances Exploration and Exploitation:} The upper confidence bound framework encourages the algorithm to explore new categories while leveraging existing knowledge, ultimately reducing regret.
-    \item \textbf{Provides a Practical Framework:} LinUCB is computationally efficient and readily interpretable, making it suitable for large-scale deployment on digital platforms.
-\end{itemize}
+The LinUCB approach balances exploration and exploitation and is highly interpretable as well. Using an upper confidence bound framework encourages the algorithm to explore new categories while leveraging existing knowledge, ultimately reducing regret. LinUCB is interpretable as well; Unlike deep representational frameworks, LinUCB learns by tuning explainable covariance parameters which are more suitable for large-scale deployment on digital platforms.
 
-However, there are several limitations and opportunities for future work:
+There are several limitations and opportunities for future work as well.
 
-\begin{itemize}
-    \item \textbf{Contextual Complexity:} Although we included user and item features, real-world scenarios may demand even more complex contextual signals (e.g., temporal trends, social network influences, and cross-platform behaviors). Incorporating such complexity might require more sophisticated models, such as neural-based contextual bandits or hybrid systems.
+\subsection{Complexity}
+
+Although we included user and item features, real-world scenarios may demand even more complex contextual signals (e.g., temporal trends, social network influences, and cross-platform behaviors). Incorporating such complexity might require more sophisticated models, such as deep learning based contextual bandits or hybrid systems.
+
+\subsection{Reward metrics}
+
+Moreover, while we used watch ratio and likes as a proxy for user engagement, future studies could explore other reward metrics, such as retention, downstream conversions, or long-term user satisfaction, to better align the model’s objectives with platform goals.
+
+\subsection{Scalability and real-time constraints}
+
+While LinUCB is relatively efficient, extremely large user bases or item catalogs could still pose computational challenges. Developing incremental or approximate update strategies would be beneficial for real-time industrial applications.
     
-    \item \textbf{Reward Definition:} We used watch ratio as a proxy for user engagement. Future studies could explore other reward metrics, such as retention, downstream conversions, or long-term user satisfaction, to better align the model’s objectives with platform goals.
+\subsection{Robustness to non-stationary environments}
 
-    \item \textbf{Scalability and Real-Time Constraints:} While LinUCB is relatively efficient, extremely large user bases or item catalogs could still pose computational challenges. Developing incremental or approximate update strategies would be beneficial for real-time industrial applications.
-    
-    \item \textbf{Robustness to Non-Stationary Environments:} User preferences may shift over time, especially in rapidly changing content landscapes. Incorporating adaptive learning mechanisms or drift-detection methods could help maintain performance over extended periods.
-\end{itemize}
-
+User preferences may shift over time, especially in rapidly changing content landscapes. Incorporating adaptive learning mechanisms or drift-detection methods could help maintain performance over extended periods.

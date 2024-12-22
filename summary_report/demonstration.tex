@@ -11,7 +11,7 @@ For our model we tried 4 different reward methods: mean of like, sum of like, me
     \label{mean_like}
 \end{figure}
 
-The mean of like model defines each arm as the mean of likes per video category, with users the states. This model did not converge during training, as evidenced by the linear cumulative regret. In testing, the model produces a pseudo-random distribution of video category predictions \ref{mean_like}.
+The mean of like model defines each arm as the mean of likes per video category. This model did not converge during training, as evidenced by the linear cumulative regret. In testing the model produces a pseudo-random distribution of video category predictions \ref{mean_like}.
 
 \subsection{Sum of Like}
 
@@ -22,7 +22,7 @@ The mean of like model defines each arm as the mean of likes per video category,
     \label{sum_like}
 \end{figure}
 
-The sum of like model defines each arm as the sum of likes per video category, with users the states. This model did converge during training, as evidenced by the flatting cumulative regret curve. The model generalizes poorly, however, and is heavily biased towards one arm. While the bias is heavy, the model is not completely biased and sometimes pulls non-favorite arms. This is likely due to bias in the input data, and the heavy skew of the non-normalized mean function \ref{sum_like}.
+The sum of like model defines each arm to be the sum of likes per video category. This model did converge during training, as evidenced by the flatting cumulative regret curve. The model generalizes poorly, however, and is heavily biased towards one arm. While the bias is heavy, the model is not completely biased and sometimes pulls non-favorite arms. This is likely due to bias in the input data, and the heavy skew of the non-normalized sum function \ref{sum_like}.
 
 \subsection{Mean of Watch Ratio}
 
@@ -33,7 +33,7 @@ The sum of like model defines each arm as the sum of likes per video category, w
     \label{mean_watchratio}
 \end{figure}
 
-The mean of watch ratio model defines each arm as the mean of watch ratio per video category, with users the states \ref{mean_watchratio}. This model did not converge during training, as evidenced by the linear cumulative regret. In testing, the model produces a pseudo-random distribution of video category predictions, similar to the sum of like model.
+The mean of watch ratio model defines each arm as the mean of watch ratio per video category \ref{mean_watchratio}. This model did not converge during training, as evidenced by the linear cumulative regret. In testing the model produces a pseudo-random distribution of video category predictions, similar to the sum of like model.
 
 \subsection{Sum of Watch Ratio}
 
@@ -46,6 +46,13 @@ The mean of watch ratio model defines each arm as the mean of watch ratio per vi
 
 The sum of watch ratio model defines each arm as the sum of watch ratio per video category, with users the states. This model did converge during training, as evidenced by the flatting cumulative regret curve. The model generalizes poorly, however, and is \textit{entirely} biased towards one arm. While the sum of like model sometimes pulls non-favorite arms, this model achieves 0 regret only pulling one arm, meaning there is one video category who's sum of watch ratio is higher for every user in the dataset \ref{sum_watchratio}.
 
+\paragraph{Overall comparison: }
+
+Results indicate video categories grouped by sum cause the model to converges bias. In contrast, categories grouped by mean are not easily modeled by LinUCB, leading to failure to converge. 
+
+In terms of regret minimization, the sum of watch ratio model performs the best. In terms of usefulness, however, the sum of likes model is generalizes far better than the sum of watch ratio. While both models are biased, the sum of likes model sometimes pulls arms which are not the clear favorite. The sum of watch ratio model only predicts one video category which is not helpful in practice. 
+
+Additionally, the models grouped by mean are unhelpful since they fail to converge during training. This indicates poor generalization, and testing yields a pseudo-random distribution of predictions across categories. Therefore the most helpful predictor is the heavily biased sum of likes model.
 
 % We demonstrate LinUCB's effectiveness by simulating a sequence of recommendations on the prepared KuaiRec dataset.
 
